@@ -3,17 +3,25 @@ from django.db import models
 
 User = get_user_model()
 
+MAX_TITLE_LENGTH = 200
+
 
 class Group(models.Model):
-    title = models.CharField(max_length=200)
+    """Модель для представления групп."""
+    title = models.CharField(max_length=MAX_TITLE_LENGTH)
     slug = models.SlugField(unique=True)
     description = models.TextField()
 
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Группа'
+        verbose_name_plural = 'Группы'
+
 
 class Post(models.Model):
+    """Модель для представления постов."""
     text = models.TextField()
     pub_date = models.DateTimeField(
         'Дата публикации', auto_now_add=True
@@ -32,8 +40,13 @@ class Post(models.Model):
     def __str__(self):
         return self.text
 
+    class Meta:
+        verbose_name = 'Пост'
+        verbose_name_plural = 'Посты'
+
 
 class Comment(models.Model):
+    """Модель для представления комментариев."""
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='comments'
     )
@@ -44,3 +57,10 @@ class Comment(models.Model):
     created = models.DateTimeField(
         'Дата добавления', auto_now_add=True, db_index=True
     )
+
+    def __str__(self):
+        return self.text
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'

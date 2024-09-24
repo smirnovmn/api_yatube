@@ -26,8 +26,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.permissions',
     'posts.apps.PostsConfig',
+    'api.apps.ApiConfig',
     'rest_framework.authtoken',
-    'api',
 ]
 
 MIDDLEWARE = [
@@ -89,6 +89,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
+
 
 LANGUAGE_CODE = 'ru-RU'
 
