@@ -1,9 +1,8 @@
 from django.shortcuts import get_object_or_404
-
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from posts.models import Post, Group, Comment, User
+from posts.models import Group, Post, User
 from .permissions import IsOwnerOrReadOnly
 from .serializers import (
     CommentSerializer,
@@ -11,7 +10,6 @@ from .serializers import (
     PostSerializer,
     UserSerializer
 )
-
 
 class PostViewSet(viewsets.ModelViewSet):
     """Вьюсет для управления объектами модели Post."""
@@ -25,7 +23,6 @@ class PostViewSet(viewsets.ModelViewSet):
 
 class CommentViewSet(viewsets.ModelViewSet):
     """Вьюсет для управления объектами модели Comment."""
-    queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsOwnerOrReadOnly, IsAuthenticated]
 
@@ -43,7 +40,7 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     """Вьюсет для управления объектами модели Group."""
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = [IsOwnerOrReadOnly, IsAuthenticated]
+    permission_classes = [IsAuthenticated,]
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
