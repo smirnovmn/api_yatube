@@ -11,6 +11,7 @@ from .serializers import (
     UserSerializer
 )
 
+
 class PostViewSet(viewsets.ModelViewSet):
     """Вьюсет для управления объектами модели Post."""
     queryset = Post.objects.all()
@@ -24,7 +25,7 @@ class PostViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     """Вьюсет для управления объектами модели Comment."""
     serializer_class = CommentSerializer
-    permission_classes = [IsOwnerOrReadOnly, IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly, IsAuthenticated,]
 
     def get_post(self):
         return get_object_or_404(Post, pk=self.kwargs['post_id'])
